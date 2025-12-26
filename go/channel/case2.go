@@ -30,6 +30,8 @@ import (
 channel 缓冲容量可以小一点，比如 3~5，模拟任务队列的“积压”。
 */
 
+// 这个其实就是work pool 可以用ctx来退出
+
 var wg sync.WaitGroup
 var producerWg sync.WaitGroup
 
