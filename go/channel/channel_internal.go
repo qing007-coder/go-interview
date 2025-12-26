@@ -6,7 +6,7 @@ import (
 )
 
 type waiter struct {
-	ch chan struct{}
+	ch chan struct{} // 只是用来阻塞 没有传数据
 	v  interface{}
 }
 
@@ -34,7 +34,7 @@ func (c *Chan) Send(v interface{}) {
 	if len(c.recvq) > 0 {
 		w := c.recvq[0]
 		c.recvq = c.recvq[1:]
-		w.v = v
+		w.v = v     // 在这里传输数据
 		close(w.ch) // 唤醒接收者
 		c.mu.Unlock()
 		return
