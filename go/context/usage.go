@@ -9,7 +9,6 @@ import (
 func main() {
 
 	// 控制协程
-
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
@@ -25,4 +24,13 @@ func main() {
 	case <-ctx.Done():
 		fmt.Println("time out")
 	}
+
+	// 传递数据
+	ctx = context.WithValue(context.Background(), "id", "123456789")
+	processRequest(ctx)
+}
+
+func processRequest(ctx context.Context) {
+	id := ctx.Value("id")
+	fmt.Println("id:", id)
 }
